@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1b5632"/><stop offset="1" stop-color="#082817"/></linearGradient></defs>
+<path d="M120 8 145 22 174 20 187 45 212 59 207 89 230 112 214 139 219 169 190 184 178 213 148 210 120 232 92 210 62 213 50 184 21 169 26 139 10 112 33 89 28 59 53 45 66 20 95 22Z" fill="url(#g)" stroke="#d8b45a" stroke-width="6"/>
+<path d="M75 74h90v15H75z" fill="#d8b45a"/><path d="M90 68q30-38 60 0" fill="none" stroke="#d8b45a" stroke-width="5"/>
+<path d="M110 43q-17 15 0 27h20q17-12 0-27z" fill="#d69a36" stroke="#f4d98c" stroke-width="3"/>
+<path d="M113 41h14v-7h-14z" fill="#d8b45a"/>
+<text x="120" y="117" text-anchor="middle" font-family="Georgia,serif" font-size="23" font-weight="bold" fill="#fff0c5">Shikarpuri</text>
+<text x="120" y="145" text-anchor="middle" font-family="Georgia,serif" font-size="22" font-weight="bold" fill="#fff0c5">Legacy</text>
+<text x="120" y="170" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" letter-spacing="3" fill="#e8c76d">PICKLES</text>
+<path d="M55 187q65 24 130 0" fill="none" stroke="#d8b45a" stroke-width="3"/>
+<text x="120" y="204" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#f7e8bd">A Taste of Tradition</text>
+</svg>
