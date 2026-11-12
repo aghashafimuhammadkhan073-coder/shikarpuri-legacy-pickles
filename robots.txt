@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shikarpuri-legacy-pickles.netlify.app/sitemap.xml

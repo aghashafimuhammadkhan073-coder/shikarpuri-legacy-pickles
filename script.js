@@ -1,121 +1,87 @@
-const WHATSAPP_NUMBER = "923372523171";
+(function () {
+  "use strict";
+  var WA_NUMBER = "923372523171";
 
-const categories = [
-  {
-    id: "oil-pickles",
-    title: "Oil Pickles",
-    subtitle: "Traditional Shikarpuri flavour, rich and full of character.",
-    products: [
-      "Mix Oil Super", "Mango Oil Super", "Chilli Oil Super", "Lemon Oil Super",
-      "Lasooda Oil Super", "Carrot Oil Super", "Mango Kutra Oil", "Onion Oil Super",
-      "Bheh Oil Super", "Chola Oil Super", "Murgh Oil Super", "Ginger Oil Super",
-      "Garlic Oil Super", "Lemon Pani Super", "Khatta Meetha Super"
-    ]
-  },
-  {
-    id: "vinegar-pickles",
-    title: "Vinegar Pickles",
-    subtitle: "A tangy collection made for lovers of classic achar.",
-    products: [
-      "Mix Vinegar Super", "Mango Vinegar Super", "Kutra Vinegar Super",
-      "Chilli Vinegar Super", "Lasooda Vinegar Super", "Carrot Vinegar Super",
-      "Onion Vinegar Super"
-    ]
-  },
-  {
-    id: "export-quality",
-    title: "Export Quality Pickles",
-    subtitle: "A special selection from the Shikarpuri Legacy range.",
-    products: [
-      "Mix Oil Export Quality", "Mango Oil Export Quality", "Lemon Oil Export Quality",
-      "Chilli Oil Export Quality", "Qurma Oil Export Quality"
-    ]
-  },
-  {
-    id: "chutneys",
-    title: "Chutneys",
-    subtitle: "Sweet, tangy and savoury favourites to complete your meal.",
-    products: [
-      "Chutney Khatti Meethi", "Chutney Imli", "Green Chutney", "Alu Bukhara", "Aam Meethi"
-    ]
-  },
-  {
-    id: "murabbas",
-    title: "Murabbas",
-    subtitle: "Traditional sweet preserves with a taste of heritage.",
-    products: [
-      "Murabba Amla", "Murabba Saib", "Murabba Hareer", "Murabba Gajar", "Murabba Bamboo"
-    ]
+  function waLink(product, size) {
+    var sizeText = size ? " (" + size + ")" : "";
+    var msg =
+      "Assalam o Alaikum! Mujhe " + product + sizeText +
+      " order karna hai. Meherbani karke price aur availability bata dein. Shukriya.";
+    return "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);
   }
-];
 
-function whatsappLink(message) {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-}
+  /* Mobile navigation */
+  var toggle = document.querySelector(".nav-toggle");
+  var nav = document.getElementById("site-nav");
+  function closeNav() {
+    if (!nav) return;
+    nav.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+  }
+  if (toggle && nav) {
+    toggle.addEventListener("click", function () {
+      var open = nav.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    nav.addEventListener("click", function (e) {
+      if (e.target.tagName === "A") closeNav();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeNav();
+    });
+  }
 
-const nav = document.getElementById("categoryNav");
-const sections = document.getElementById("categorySections");
-
-categories.forEach((category, categoryIndex) => {
-  const navLink = document.createElement("a");
-  navLink.href = `#${category.id}`;
-  navLink.textContent = category.title;
-  nav.append(navLink);
-
-  const section = document.createElement("section");
-  section.className = "category-section";
-  section.id = category.id;
-
-  const heading = document.createElement("div");
-  heading.className = "category-heading";
-  const eyebrow = document.createElement("p");
-  eyebrow.className = "eyebrow";
-  eyebrow.textContent = `Our collection · 0${categoryIndex + 1}`;
-  const title = document.createElement("h2");
-  title.textContent = category.title;
-  const subtitle = document.createElement("p");
-  subtitle.className = "category-subtitle";
-  subtitle.textContent = category.subtitle;
-  heading.append(eyebrow, title, subtitle);
-
-  const grid = document.createElement("div");
-  grid.className = "product-grid";
-
-  category.products.forEach((productName, index) => {
-    const card = document.createElement("article");
-    card.className = "product-card";
-    const visual = document.createElement("div");
-    visual.className = `product-visual visual-${categoryIndex + 1}`;
-    visual.setAttribute("aria-hidden", "true");
-    const jar = document.createElement("span");
-    jar.className = "jar-mark";
-    jar.textContent = "SL";
-    visual.append(jar);
-
-    const number = document.createElement("span");
-    number.className = "product-number";
-    number.textContent = String(index + 1).padStart(2, "0");
-    const name = document.createElement("h3");
-    name.textContent = productName;
-    const pack = document.createElement("p");
-    pack.className = "pack-size";
-    pack.textContent = categoryIndex < 3 ? "Available packs: 400g · 800g" : "Available pack: 1kg";
-    const order = document.createElement("a");
-    order.className = "order-link";
-    order.href = whatsappLink(`Assalam-o-Alaikum! I am interested in ${productName} from Shikarpuri Legacy Pickles. Please share the price and availability.`);
-    order.target = "_blank";
-    order.rel = "noopener noreferrer";
-    order.textContent = "Enquire on WhatsApp ↗";
-    card.append(visual, number, name, pack, order);
-    grid.append(card);
+  /* Product filtering */
+  var filterBtns = document.querySelectorAll(".filter-btn");
+  var groups = document.querySelectorAll(".menu-group");
+  function applyFilter(cat, updateHash) {
+    var valid = false;
+    filterBtns.forEach(function (b) {
+      if (b.dataset.filter === cat) valid = true;
+    });
+    if (!valid) cat = "all";
+    filterBtns.forEach(function (b) {
+      b.setAttribute("aria-pressed", b.dataset.filter === cat ? "true" : "false");
+    });
+    groups.forEach(function (g) {
+      g.hidden = !(cat === "all" || g.dataset.category === cat);
+    });
+    if (updateHash && history.replaceState) {
+      history.replaceState(null, "", cat === "all" ? "#menu" : "#" + cat);
+    }
+  }
+  filterBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      applyFilter(b.dataset.filter, true);
+    });
   });
+  document.querySelectorAll("[data-goto-filter]").forEach(function (c) {
+    c.addEventListener("click", function (e) {
+      e.preventDefault();
+      applyFilter(c.dataset.gotoFilter, true);
+      var menu = document.getElementById("menu");
+      if (menu) menu.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+  var hash = (location.hash || "").replace("#", "");
+  if (hash && hash !== "menu") applyFilter(hash, false);
 
-  section.append(heading, grid);
-  sections.append(section);
-});
-
-document.querySelectorAll("[data-wa]").forEach((link) => {
-  link.href = whatsappLink("Assalam-o-Alaikum! I would like to enquire about Shikarpuri Legacy Pickles. Please share your product catalogue and delivery details.");
-});
-
-document.getElementById("year").textContent = new Date().getFullYear();
+  /* Size chips update WhatsApp message */
+  document.querySelectorAll(".product-card").forEach(function (card) {
+    var btn = card.querySelector(".order-btn");
+    var chips = card.querySelectorAll(".size-chip");
+    var name = card.dataset.product;
+    chips.forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        var already = chip.getAttribute("aria-pressed") === "true";
+        chips.forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
+        if (already) {
+          btn.href = waLink(name, card.dataset.allsizes);
+        } else {
+          chip.setAttribute("aria-pressed", "true");
+          btn.href = waLink(name, chip.dataset.size);
+        }
+      });
+    });
+  });
+})();

@@ -1,25 +1,19 @@
 SHIKARPURI LEGACY PICKLES WEBSITE
 
 Files:
-- index.html: website content and layout
-- style.css: responsive design and colours
-- script.js: menu products and WhatsApp order links
+- index.html: page content (all 37 products are written directly in the HTML for Google)
+- style.css: design and responsive layout
+- script.js: mobile menu, category filter, WhatsApp order links
 - logo.svg: brand logo
+- sitemap.xml, robots.txt: for Google
+- netlify.toml: Netlify settings
+- images/og-image.png: preview image for WhatsApp/Facebook sharing
+- 404.html: page-not-found page
 
-HOW TO OPEN:
-1. Extract this ZIP file.
-2. Open the extracted folder.
-3. Double-click index.html to open the website in your browser.
+WHATSAPP: +92 337 2523171 (https://wa.me/923372523171)
+PACK SIZES: all pickles 400g and 800g; chutneys and murabbas 1kg.
+PRICES: intentionally not displayed.
 
-WHATSAPP:
-The website currently uses the business number 03372523171.
-
-PRODUCTS AND PACK SIZES:
-Achar categories currently show 400g and 800g. Chutneys and murabbas show 1kg.
-Prices are intentionally not displayed yet.
-
-MENU NOTE:
-The supplied menu text did not include product names for numbers 23, 24 and 25 in the Vinegar Pickles section. Those have not been invented or added. They can be inserted later when confirmed.
-
-BEFORE PUBLISHING:
-Add real product photographs and confirm all pack sizes, delivery coverage and business details.
+BEFORE PUBLISHING / LATER:
+- Add real product photographs when available.
+- When a custom domain is connected, replace the netlify.app address in index.html, sitemap.xml and robots.txt.
