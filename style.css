@@ -254,3 +254,9 @@ section{padding:76px 0}
 .guide-card h3{font-size:1.1rem;margin-bottom:.4em}
 .guide-card p{margin:0 0 .6em;color:var(--muted);font-size:.9rem}
 .guide-card span{color:var(--green-700);font-weight:600;font-size:.9rem}
+
+/* Product photos */
+.card-photo{display:block;background:#f3efe6;aspect-ratio:1/1;overflow:hidden}
+.card-photo img{width:100%;height:100%;object-fit:contain;display:block}
+.detail-photo{background:#f3efe6;border:2px solid var(--gold);border-radius:22px;overflow:hidden;box-shadow:var(--shadow);display:grid;place-items:center}
+.detail-photo img{width:100%;height:auto;max-height:560px;object-fit:contain;display:block}
